@@ -76,6 +76,14 @@ ipcMain.on("appointment:create", (event, appointment) => {
     console.log(appointment);
 });
 
+ipcMain.on("appointment:require:list", (event, appointment) => {
+    console.log(appointment);
+});
+
+ipcMain.on("appointment:require:list", event => {
+    console.log("here");
+});
+
 const menuTemplate = [{
     label: "File",
     submenu: [{
