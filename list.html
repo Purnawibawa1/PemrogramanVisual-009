@@ -16,7 +16,7 @@
         ipcRenderer.send("appointment:require:list");
 
         ipcRenderer.on("appointment:requiew:list", (event, appointments) => {
-            const listDiv = document.getElementById("list");           
+            const listDiv = document.getElementById("List");           
             appointments.forEach(appointment => {
                 const appointmentDiv = document.createElement("div");
                 const nameParagraph = document.createElement("p");
