@@ -6,7 +6,12 @@
   "scripts": {
     "start": " set ELECTRON_DISABLE_SECURITY_WARNINGS=true && electron ."
   },
-
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "uuid": "^7.0.3"
+  },
+  "devDependencies": {
+    "electron": "^8.2.0"
+  }
 }
