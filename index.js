@@ -84,11 +84,11 @@ ipcMain.on("appointment:create", (event, appointment) => {
     console.log(allAppointment);
 });
 
-ipcMain.on("appointment:require:list", event => {
-    console.log("here");
+ipcMain.on("appointment:request:list", event => {
+    listWindow.webContents.send('appointment:response:list', allAppointment);
 });
 
-ipcMain.on("appointment:require:today", event => {
+ipcMain.on("appointment:request:today", event => {
     console.log("here2");
 });
 
