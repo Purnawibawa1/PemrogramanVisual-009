@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menghitung Tabung</title>
+</head>
+
+<style>
+
+body{
+    background-color: #e9e9e9;
+}
+
+@font-face {
+    font-family: Playfair;
+    src: url(PlayfairDisplay-Regular.ttf);
+}
+
+ div {
+ margin: auto ;
+ width: 400px;
+}
+
+table {
+ border-style: none;
+ border-collapse: collapse;
+ width: 100%;
+}
+
+th{
+    border-radius: 10px;
+    width: 100%;
+    height: 40px;
+    background-color: yellow;
+    border: none;
+    font-weight: bold;
+    color: blue;
+    font-size: 20px;
+    font-family: Playfair;
+    margin-bottom: 100px;
+}
+
+img{
+    margin: auto ;
+    padding-left: 100px;
+    width: 200px;
+    height: 200px;   
+}
+
+td{
+ border: none;
+ font-family: Playfair;
+ letter-spacing: 2px;
+}
+
+input[type=text]{
+ border-radius: 10px;
+ padding: 10px;
+ width: 380px;
+ border-style: solid;
+ border-color: #6d6e6a;
+ font-size: 16px;
+}
+
+input[type=text]:disabled{
+ background-color: white;
+}
+
+
+button {
+ border-radius: 25px;
+ width: 100%;
+ height: 40px;
+ background-color: yellow;
+ font-weight: bold;
+    border: none;
+    color: blue;
+    margin-bottom: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: Playfair;
+}
+
+button:hover {
+  background-color: grey;
+  color: yellow;
+}
+
+div.back{
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+
+.previous {
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: grey;
+  color: yellow;
+}
+
+.previous {
+  background-color: yellow;
+  color: blue;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-family: Playfair;
+  font-size: 12pt;
+}
+
+</style>
+
+<body>
+
+<div class="back">
+     <a href="file:///C:/Users/Ady%20PW/Documents/Pemrograman%20Visual/Pemrograman/Projek_UTS-Visual/menuBangunRuang.html" class="previous"> Back to Menu</a>
+</div>
+
+<div>
+ <table>
+   <tr>
+        <th>Tabung</th>
+   </tr>
+   <tr>
+       <td>
+           <img src="C:\Users\Ady PW\Documents\Pemrograman Visual\Pemrograman/Projek_UTS-Visual/Tabung.jpg" alt="">
+       </td>
+   </tr>
+  <tbody>
+   <tr>
+        <td>Masukan Jari-Jari (r)</td>
+   </tr>
+   <tr>
+        <td><input type="text" id="ipt_jariJari" placeholder="Masukkan angka" onkeypress="return hanyaAngka(event)"></td>
+   </tr>
+   
+    <tr>
+        <td>Masukan Tinggi</td>
+    </tr>
+    <tr>
+        <td><input type="text" id="ipt_tinggi" placeholder="Masukkan angka" onkeypress="return hanyaAngka(event)" ></td>
+    </tr>
+
+   <tr>
+        <td><button onclick="hitung()">Hitung</button></td>
+   </tr>
+  </tbody>
+
+  <tfoot>
+   <tr>
+        <td>Luas Permukaan Tabung</td>
+   </tr>
+   <tr>
+        <td><input type="text" id="opt_luas" disabled></td>
+   </tr>
+   </tr>
+  </tfoot>
+  
+ </table>
+</div>
+</body>
+
+<script>
+
+    var luas;
+    var luasAlas;
+    var luasSelimut;
+    var jariJari;
+    var tinggi;
+
+    
+    function hitung() {
+     jariJari = parseFloat(document.getElementById("ipt_jariJari").value);
+     tinggi = parseFloat(document.getElementById("ipt_tinggi").value);
+
+     luasSelimut = jariJari + tinggi;
+     luasAlas = (22/7) * jariJari;
+
+     luas =  2 * (luasAlas * luasSelimut);
+
+     document.getElementById('opt_luas').value = luas;
+
+    }
+    
+    function hanyaAngka(evt) {
+		  var charCode = (evt.which) ? evt.which : event.keyCode
+		   if (charCode > 31 && (charCode < 48 || charCode > 57))
+ 
+		    return false;
+		  return true;
+		}
+
+    </script>
+
+</html>

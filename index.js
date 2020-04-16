@@ -8,6 +8,7 @@ let todayWindow;
 let createWindow;
 let listWindow;
 let aboutWindow;
+let ruangBangunWindow;
 
 let allAppointment = [];
 
@@ -75,6 +76,21 @@ const aboutWindowCreator = () => {
     aboutWindow.on("closed",() => (aboutWindow = null));
 };
 
+const ruangBangunWindowCreator = () => {
+    ruangBangunWindow = new BrowserWindow({
+        webPreferences: {
+            nodeIntegration: true
+        },
+        width: 500,
+        height: 600,
+        title: "Ruang Bangun Appointments"
+    });
+
+    ruangBangunWindow.setMenu(null);
+    ruangBangunWindow.loadURL(`file://${__dirname}/Projek_UTS-Visual/menuBangunRuang.html`);
+    ruangBangunWindow.on("closed",() => (ruangBanguntWindow = null));
+};
+
 ipcMain.on("appointment:create", (event, appointment) => {
     appointment["id"] = uuid();
     appointment["done"] = 0;
@@ -134,6 +150,13 @@ const menuTemplate = [{
         label: "About",
         click() {
             aboutWindowCreator();
+        }
+    },
+
+    {
+        label: "Operasi Ruang Bangun",
+        click() {
+            ruangBangunWindowCreator();
         }
     }
 ]
