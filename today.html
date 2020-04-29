@@ -3,65 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Today</title>
+    <title>Today Window</title>
 </head>
 <body>
     <h1>Today Window</h1>
     <div id="list"></div>
 </body>
 
-    <script>
-        const electron = require("electron");
+<script>
+    const electron = require("electron");
         const {ipcRenderer} = electron;
-        ipcRenderer.send("appointment:require:today");
+        ipcRenderer.send("appointment:request:today");
 
-        ipcRenderer.on("appointment:requiew:today", (event, appointments) => {
-            const listDiv = document.getElementById("List");           
-            appointments.forEach(appointment => {
-                const appointmentDiv = document.createElement("div");
-                const nameParagraph = document.createElement("p");
-                nameParagraph.innerHTML = `Name: ${appointment.name}`;
+        ipcRenderer.on("appointment:response:today", (event, appointment) => {
+        const listDiv = document.getElementById("list");
+        
+        appointment.forEach(appointment => {
+        const appointmentDiv =document.createElement("div");
 
-                const numberParagraph = document.createElement("p");
-                numberParagraph.innerHTML = `Phone Number: ${appointment.number} `;
+        const nameParagraph = document.createElement("p");
+        nameParagraph.innerHTML = `Name: ${appointment.name}`;
 
-                const dateParagraph = document.createElement("p");
-                dateParagraph.innerHTML = `Date: ${appointment.date}`;
+        const numberParagraph = document.createElement("p")
+        numberParagraph.innerHTML = `Phone Number: ${appointment.number}`;
 
-                const hourParagraph = document.createElement("p");
-                hourParagraph.innerHTML = `Hour: ${appointment.hour}`;
+        const dateParagraph = document.createElement("p")
+        dateParagraph.innerHTML = `Date: ${appointment.date}`;
 
-                const symptomsParagraph = document.createElement("p");
-                symptomsParagraph.innerHTML = `Symtoms: ${appointment.symptoms}`;
+        const hourParagraph = document.createElement("p")
+        hourParagraph.innerHTML = `Hour: ${appointment.hour}`;
+        
+        const symptomsParagraph = document.createElement("p")
+        symptomsParagraph.innerHTML = `Symptoms: ${appointment.symptoms}`;
 
-                const doneParagraph = document.createElement("p");
-                doneParagraph.innerHTML = `Done: ${appointment.done ? "Yes" : "No"}`;
+        const doneParagraph = document.createElement("p")
+        doneParagraph.innerHTML = `Done: ${appointment.done ? "Yes" : "No"}`;
+        
+        const doneButton = document.createElement("Button");
+        doneButton.innerHTML = "Done";
+        doneButton.disabled = appointment.done ? true : false;
+        doneButton.onclick = () => done(appointment.id);
 
-                const doneButton = document.createElement("button");
-                doneButton.innerHTML = "Done";
-                doneButton.disabled = appointment.done ? true : false;
-                doneButton.onclick = () => done(appointment.id);
+        const hr = document.createElement("hr");
 
-                const hr = document.createElement("hr");
+        appointmentDiv.appendChild(nameParagraph);
+        appointmentDiv.appendChild(numberParagraph);
+        appointmentDiv.appendChild(dateParagraph);
+        appointmentDiv.appendChild(hourParagraph);
+        appointmentDiv.appendChild(symptomsParagraph);
+        appointmentDiv.appendChild(doneParagraph);
+        appointmentDiv.appendChild(doneButton);
+        appointmentDiv.appendChild(hr);
 
-                appointmentDiv.appendChild(nameParagraph);
-                appointmentDiv.appendChild(numberParagraph);
-                appointmentDiv.appendChild(dateParagraph);
-                appointmentDiv.appendChild(hourParagraph);
-                appointmentDiv.appendChild(symptomsParagraph);
-                appointmentDiv.appendChild(doneParagraph);
-                appointmentDiv.appendChild(doneButton);
-                appointmentDiv.appendChild(hr);
+        listDiv.append(appointmentDiv);
 
-                listDiv.append(appointmentDiv);
+        });
+    });
 
-            })
-
-        }); 
-        const done = id => {
-            ipcRenderer.send("appointment:done", id);
-        }
-    </script>
-
-
+    const done = id => {
+        ipcRenderer.send("appointment:done", id);
+    }
+    
+</script>
 </html>
